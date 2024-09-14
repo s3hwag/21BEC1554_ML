@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DATABASE_URL=postgresql://sehwagvijay:beachplease@db:5432/document_retrieval
+      - REDIS_URL=redis://redis:6379
+      - SCRAPER_INTERVAL=3600
+  
+  db:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: sehwagvijay
+      POSTGRES_PASSWORD: beachplease
+      POSTGRES_DB: document_retrieval
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:6.2
+    container_name: redis_cache
+    ports:
+      - "6379:6379"

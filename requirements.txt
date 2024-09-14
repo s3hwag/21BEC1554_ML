@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary  # PostgreSQL driver
+redis
+aioredis  # Async Redis client
+requests
+beautifulsoup4  # For web scraping
+sentence-transformers  # For encoding text to vectors
+#milvus 
+python-dotenv  # For managing environment variables
