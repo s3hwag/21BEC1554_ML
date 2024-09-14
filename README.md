@@ -123,43 +123,43 @@ docker-compose down
 {"status": "API is active"}
 ```
 ### 2. Search Documents
-Endpoint: /search
-Method: GET
-Parameters:
-query (str): The search query.
-top_k (int): Number of top results to return. (Default: 5)
-threshold (float): Similarity score threshold. (Default: 0.5)
-user_id (str): User identifier.
-Description: Searches for documents based on the provided query and returns the top results.
-Response:
-json
-Copy code
+- Endpoint: /search
+- Method: GET
+- Parameters:
+- query (str): The search query.
+- top_k (int): Number of top results to return. (Default: 5)
+- threshold (float): Similarity score threshold. (Default: 0.5)
+- user_id (str): User identifier.
+- Description: Searches for documents based on the provided query and returns the top results.
+- Response:
+```json
 {"results": [...]}
-3. Retrieve User Details
-Endpoint: /users/{user_id}
-Method: GET
-Parameters: user_id (str) - The ID of the user to retrieve.
-Description: Retrieves user details from the database based on user_id.
-Caching
-Backend: Redis
-Purpose: Caches frequently accessed documents to speed up retrieval.
-Invalidation Strategy: Implement a Least Recently Used (LRU) policy for cache invalidation to manage the cache size and ensure data consistency.
-Rate Limiting
-Strategy: Limits each user to a maximum of 5 requests. Exceeding the limit returns an HTTP 429 status code.
-Implementation: Rate limiting is managed through the rate_limit.py script using database tracking.
-Background Scraping Task
-Scraper: Defined in scraper.py.
-Function: Scrapes new articles periodically (every hour by default) and stores them in the database.
-Trigger: Runs in a separate thread when the server starts.
-Testing
-Unit Tests: Test individual components, such as encoders, search functions, and database models.
-Integration Tests: Test interactions between components like API endpoints, database connections, and caching.
-Performance Tests: Ensure the application can handle a high volume of requests.
+```
+### 3. Retrieve User Details
+- Endpoint: /users/{user_id}
+- Method: GET
+- Parameters: user_id (str) - The ID of the user to retrieve.
+- Description: Retrieves user details from the database based on user_id.
+### Caching
+- Backend: Redis
+- Purpose: Caches frequently accessed documents to speed up retrieval.
+- Invalidation Strategy: Implement a Least Recently Used (LRU) policy for cache invalidation to manage the cache size and ensure data consistency.
+### Rate Limiting
+- Strategy: Limits each user to a maximum of 5 requests. Exceeding the limit returns an HTTP 429 status code.
+- Implementation: Rate limiting is managed through the rate_limit.py script using database tracking.
+### Background Scraping Task
+- Scraper: Defined in scraper.py.
+- Function: Scrapes new articles periodically (every hour by default) and stores them in the database.
+- Trigger: Runs in a separate thread when the server starts.
+### Testing
+- Unit Tests: Test individual components, such as encoders, search functions, and database models.
+- Integration Tests: Test interactions between components like API endpoints, database connections, and caching.
+- Performance Tests: Ensure the application can handle a high volume of requests.
 To run tests:
-bash
-Copy code
+```bash
 pytest tests/
-Deployment
+```
+### Deployment
 Docker Deployment: The application is containerized for easy deployment across different environments.
 CI/CD Integration: Use GitHub Actions, GitLab CI, or Jenkins for continuous integration and deployment.
 Cloud Platforms: Deploy on cloud platforms like AWS (ECS, EKS), Azure (AKS), or Google Cloud (GKE).
