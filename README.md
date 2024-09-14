@@ -78,5 +78,90 @@ cd document_retrieval_system
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
+## Install Python dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+## Set Up Docker
+### Build the Docker image:
+```bash
+docker build -t fastapi-app
+```
+### Start the services using Docker Compose:
+```bash
+docker-compose up --build
+```
+## Environment Variables
+### Create a .env file in the root directory and add the following environment variables:
+
+```env
+DATABASE_URL=postgresql://yourusername:yourpassword@db:5432/document_retrieval
+REDIS_URL=redis://redis:6379
+SCRAPER_INTERVAL=3600  # Run scraper every hour
+```
+## Running the Application
+### To run the application locally:
+
+### Start the Docker containers:
+```bash
+docker-compose up --build
+```
+### The FastAPI application will be available at http://localhost:8000.
+
+### To stop the containers, press Ctrl+C and run:
+```bash
+docker-compose down
+```
+## API Endpoints
+### 1. Health Check
+Endpoint: /health
+Method: GET
+Description: Checks if the API is active.
+Response:
+json
+Copy code
+{"status": "API is active"}
+2. Search Documents
+Endpoint: /search
+Method: GET
+Parameters:
+query (str): The search query.
+top_k (int): Number of top results to return. (Default: 5)
+threshold (float): Similarity score threshold. (Default: 0.5)
+user_id (str): User identifier.
+Description: Searches for documents based on the provided query and returns the top results.
+Response:
+json
+Copy code
+{"results": [...]}
+3. Retrieve User Details
+Endpoint: /users/{user_id}
+Method: GET
+Parameters: user_id (str) - The ID of the user to retrieve.
+Description: Retrieves user details from the database based on user_id.
+Caching
+Backend: Redis
+Purpose: Caches frequently accessed documents to speed up retrieval.
+Invalidation Strategy: Implement a Least Recently Used (LRU) policy for cache invalidation to manage the cache size and ensure data consistency.
+Rate Limiting
+Strategy: Limits each user to a maximum of 5 requests. Exceeding the limit returns an HTTP 429 status code.
+Implementation: Rate limiting is managed through the rate_limit.py script using database tracking.
+Background Scraping Task
+Scraper: Defined in scraper.py.
+Function: Scrapes new articles periodically (every hour by default) and stores them in the database.
+Trigger: Runs in a separate thread when the server starts.
+Testing
+Unit Tests: Test individual components, such as encoders, search functions, and database models.
+Integration Tests: Test interactions between components like API endpoints, database connections, and caching.
+Performance Tests: Ensure the application can handle a high volume of requests.
+To run tests:
+bash
+Copy code
+pytest tests/
+Deployment
+Docker Deployment: The application is containerized for easy deployment across different environments.
+CI/CD Integration: Use GitHub Actions, GitLab CI, or Jenkins for continuous integration and deployment.
+Cloud Platforms: Deploy on cloud platforms like AWS (ECS, EKS), Azure (AKS), or Google Cloud (GKE).
 
 
