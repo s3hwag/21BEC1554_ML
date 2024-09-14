@@ -131,10 +131,7 @@ docker-compose down
 - threshold (float): Similarity score threshold. (Default: 0.5)
 - user_id (str): User identifier.
 - Description: Searches for documents based on the provided query and returns the top results.
-- Response:
-```json
-{"results": [...]}
-```
+
 ### 3. Retrieve User Details
 - Endpoint: /users/{user_id}
 - Method: GET
