@@ -159,6 +159,5 @@ pytest tests/
 ### Deployment
 Docker Deployment: The application is containerized for easy deployment across different environments.
 CI/CD Integration: Use GitHub Actions, GitLab CI, or Jenkins for continuous integration and deployment.
-Cloud Platforms: Deploy on cloud platforms like AWS (ECS, EKS), Azure (AKS), or Google Cloud (GKE).
 
 
