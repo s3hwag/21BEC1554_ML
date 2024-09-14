@@ -66,5 +66,17 @@ The project consists of the following components:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/document_retrieval_system.git
+git clone https://github.com/s3hwag/document_retrieval_system.git
 cd document_retrieval_system
+```
+
+## Set Up Python Virtual Environment
+
+### Create and activate a virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+
