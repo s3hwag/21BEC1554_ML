@@ -115,14 +115,14 @@ docker-compose down
 ```
 ## API Endpoints
 ### 1. Health Check
-Endpoint: /health
-Method: GET
-Description: Checks if the API is active.
-Response:
-json
-Copy code
+- Endpoint: /health
+- Method: GET
+- Description: Checks if the API is active.
+- Response:
+```json
 {"status": "API is active"}
-2. Search Documents
+```
+### 2. Search Documents
 Endpoint: /search
 Method: GET
 Parameters:
