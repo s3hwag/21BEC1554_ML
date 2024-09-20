@@ -1,5 +1,3 @@
-# 21BEC1554_ML
-
 # Document Retrieval System for Chat Applications
 
 This project is a backend document retrieval system designed for chat applications to use as context during inference with Large Language Models (LLMs). The system retrieves relevant documents from a database based on user queries, caches frequently accessed results for faster retrieval, and enforces rate-limiting to control the number of API requests.
